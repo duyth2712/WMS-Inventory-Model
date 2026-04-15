@@ -83,8 +83,9 @@ By deploying this analytical framework, the Operations and PMO teams can:
 
 ## 🚀 How to Run This Project
 1. **Database Setup:** * Open SSMS (SQL Server Management Studio).
-   * Run the `01_Create_Mock_Data.sql` script to generate the WMS tables.
-   * Run the `02_Create_Views.sql` script to deploy the backend logic.
+   * Run the `01_CreateInventorySchema.sql` script to generate the WMS tables.
+   * Run the `02_MockDataGeneration.sql` script to generate mock data.
+   * Run the `03_vw_Inventory_Aging_Analysis.sql` script to deploy the backend logic.
 2. **Dashboard Setup:**
    * Open the `SmartStock_Dashboard.pbix` file.
    * Go to *Transform Data > Data Source Settings* and update the server name to your local SQL Server instance.
