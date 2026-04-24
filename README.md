@@ -1,9 +1,5 @@
 # 📦 SmartStock: Inventory Aging & Operational Analytics
 
-![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
-![SQL Server](https://img.shields.io/badge/MS_SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)
-![Data Analytics](https://img.shields.io/badge/Data_Analytics-Operations-blue?style=for-the-badge)
-
 ## 📑 Table of Contents
 - [Project Overview](#-project-overview)
 - [Business Problem](#-business-problem)

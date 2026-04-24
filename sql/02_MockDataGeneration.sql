@@ -26,7 +26,7 @@ INSERT INTO dim_Location (LocationID, ZoneType, Aisle, Rack, Bin) VALUES
 ('LOC-B05-11', 'Bulk', 'B', '05', '11'),
 ('LOC-Q01-01', 'Quarantine', 'Q', '01', '01');
 
--- 4. Generate 1000 Rows for fact_Inventory_Batch (Using a recursive CTE)
+-- 4. Generate 1000 Rows for fact_Inventory_Batch
 WITH RandomData AS (
     SELECT 1 as ID
     UNION ALL

@@ -1,5 +1,5 @@
---OBJECTIVE: Transform raw WMS data into actionable stock health insights.
---KEY METRICS: Inventory Value, Aging Buckets, Expiry Risk, and RTV Eligibility.
+--OBJECTIVE: Transform raw WMS data into actionable stock health & financial risk insights.
+--KEY METRICS: Inventory Value, Aging Buckets, Expiry Risk, Write-off Risk, and RTV Recoverable Value.
 
 -- Create Inventory Aging Analysis View
 CREATE OR ALTER VIEW vw_Inventory_Aging_Analysis AS
@@ -41,8 +41,22 @@ SELECT
     CASE 
         WHEN DATEDIFF(DAY, f.ReceiveDate, GETDATE()) <= s.ReturnPolicyDays THEN 'Eligible for Return'
         ELSE 'Non-Returnable'
-    END AS ReturnStatus
+    END AS ReturnStatus,
+    -- 6. Write-Off Risk Value 
+    CASE 
+        WHEN DATEDIFF(DAY, f.ReceiveDate, GETDATE()) > 90 
+          OR f.ExpirationDate < GETDATE() 
+          OR DATEDIFF(DAY, GETDATE(), f.ExpirationDate) <= 30 
+        THEN (f.CurrentQty * p.UnitCost)
+        ELSE 0 
+    END AS WriteOff_Risk_Value,
 
+    -- 7. RTV Recoverable Value
+    CASE 
+        WHEN DATEDIFF(DAY, f.ReceiveDate, GETDATE()) <= s.ReturnPolicyDays 
+        THEN (f.CurrentQty * p.UnitCost)
+        ELSE 0 
+    END AS RTV_Recoverable_Value
 FROM fact_Inventory_Batch f
 JOIN dim_Product p ON f.SKU = p.SKU
 JOIN dim_Supplier s ON f.SupplierID = s.SupplierID
